@@ -6,6 +6,8 @@
    erro: .double 0.0000000000001
    divi: .double 2
    int_maior: .double 1
+   resul_1: .asciiz "A raiz cubica é "
+   resul_2: .asciiz " erro eh menor que  "   
    
      
 .text
@@ -87,6 +89,21 @@ x2:
    		
 exit:
    mul.d $f24, $f10, $f10
-   mul.d $f24, $f24, $f10
-   sub.d $f24, $f24, $f0  
+   mul.d $f24, $f24, $f10	# eleva ao cubo o resultado para comparar com o valor da raiz
+   sub.d $f24, $f0, $f24  
    
+   la $a0, resul_1   # imprime na tela a mensagem
+   li $v0, 4
+   syscall
+   
+   li $v0, 3
+   mov.d $f12, $f10	
+   syscall
+   
+   la $a0, resul_2   # imprime na tela a mensagem
+   li $v0, 4
+   syscall
+   
+   li $v0, 3
+   mov.d $f12, $f24	
+   syscall
